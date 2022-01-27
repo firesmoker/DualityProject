@@ -9,6 +9,7 @@ namespace Assets.Scripts
         public float fallingSpeed = 1;
         public float generationRate = 1;
         public GameObject redObstaclePrefab, blueObstaclePrefab;
+        public GameObject obstaclesContainer;
         public Transform obstacleSpawningPosition;
 
         public static GameManager Single;
@@ -16,7 +17,12 @@ namespace Assets.Scripts
         public void Start()
         {
             Single = this;
+            var newObstacle = Instantiate(redObstaclePrefab, obstacleSpawningPosition.position, Quaternion.identity, obstaclesContainer.transform);
+        }
 
+        public void Update()
+        {
+            
         }
     }
 }
