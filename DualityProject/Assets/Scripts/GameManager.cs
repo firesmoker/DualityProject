@@ -9,6 +9,7 @@ namespace Assets.Scripts
         public float fallingSpeed = 1;
         public float generationRate = 1;
         public GameObject redObstaclePrefab, blueObstaclePrefab;
+        public Transform obstacleSpawningPosition;
 
         public static GameManager Single;
 
