@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts
 {
@@ -10,6 +11,13 @@ namespace Assets.Scripts
         public float flipSpeed = 4;
 
         private float prevRotation = 0;
+
+        public static Player Single;
+
+        private void Start()
+        {
+            Single = this;
+        }
 
         private void Update()
         {
@@ -33,13 +41,9 @@ namespace Assets.Scripts
         private void OnTriggerEnter2D(Collider2D collision)
         {
             var obstaclePolarity = collision.gameObject.GetComponent<Obstacle>().passablePolarity;
-            if(polarity!=obstaclePolarity)
+            if (polarity != obstaclePolarity)
             {
-                Debug.Log("matching polarity");
-            }
-            else
-            {
-                Debug.Log("unmatching polarity");
+                GameManager.Single.Die();
             }
         }
     }
