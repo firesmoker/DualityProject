@@ -19,6 +19,26 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.0754717
       objectReference: {fileID: 0}
+    - target: {fileID: 3240032089110281597, guid: a0aa9d17154d0425ea5ab85b6141d116, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3657887493295318417, guid: a0aa9d17154d0425ea5ab85b6141d116, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5789008509417279978, guid: a0aa9d17154d0425ea5ab85b6141d116, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5899727962013318788, guid: a0aa9d17154d0425ea5ab85b6141d116, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6034437731691654228, guid: a0aa9d17154d0425ea5ab85b6141d116, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 7706078882615624816, guid: a0aa9d17154d0425ea5ab85b6141d116, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -69,6 +89,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7706078882615624822, guid: a0aa9d17154d0425ea5ab85b6141d116, type: 3}
       propertyPath: passablePolarity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8891999204756938470, guid: a0aa9d17154d0425ea5ab85b6141d116, type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -14,6 +14,8 @@ namespace Assets.Scripts
         public AnimationCurve flipAnimation;
         public AnimationCurve swingAnimation;
         public AnimationCurve horizontalMovement;
+        public float shakeSpeed;
+        public float shakeAmplitude;
 
         public SpriteRenderer lightCharacter;
         public SpriteRenderer darkCharacter;

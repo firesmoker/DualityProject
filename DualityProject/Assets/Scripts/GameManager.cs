@@ -54,6 +54,9 @@ namespace Assets.Scripts
         public Gradient lightParticlesColors;
         public Gradient darkParticlesColors;
 
+        [Header("Music")]
+        public AudioSource music;
+
 
         private float score = 0;
         private static float highScore = 0;
@@ -87,6 +90,12 @@ namespace Assets.Scripts
             darkBG2.transform.position = Vector3.down * resY / 2 + Vector3.forward;
 
             deathScreen.SetAlpha(1);
+
+            if (!music.isPlaying)
+            {
+                music.Play();
+                DontDestroyOnLoad(music);
+            }
         }
 
         public void Update()
