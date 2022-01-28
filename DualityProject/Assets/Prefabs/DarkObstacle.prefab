@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 68825146597327326, guid: a0aa9d17154d0425ea5ab85b6141d116, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 42aebfbb85c4f1f419f78b380d7bdc70, type: 2}
     - target: {fileID: 460980060549892976, guid: a0aa9d17154d0425ea5ab85b6141d116, type: 3}
       propertyPath: m_Color.b
       value: 0.0754717
@@ -19,25 +23,73 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.0754717
       objectReference: {fileID: 0}
+    - target: {fileID: 1843147466292198765, guid: a0aa9d17154d0425ea5ab85b6141d116, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9f89a349ed3c95540811cf9486850ab0, type: 2}
+    - target: {fileID: 2557637650963672765, guid: a0aa9d17154d0425ea5ab85b6141d116, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 78c34a9d8cea2d9418cbb4128d31b9ca, type: 2}
     - target: {fileID: 3240032089110281597, guid: a0aa9d17154d0425ea5ab85b6141d116, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3657887493295318417, guid: a0aa9d17154d0425ea5ab85b6141d116, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4978484061470981336, guid: a0aa9d17154d0425ea5ab85b6141d116, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4978484061470981336, guid: a0aa9d17154d0425ea5ab85b6141d116, type: 3}
+      propertyPath: InitialModule.startSizeY.scalar
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4978484061470981336, guid: a0aa9d17154d0425ea5ab85b6141d116, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5072546696973605945, guid: a0aa9d17154d0425ea5ab85b6141d116, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9f89a349ed3c95540811cf9486850ab0, type: 2}
+    - target: {fileID: 5612607749134435030, guid: a0aa9d17154d0425ea5ab85b6141d116, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5612607749134435030, guid: a0aa9d17154d0425ea5ab85b6141d116, type: 3}
+      propertyPath: InitialModule.startSizeY.scalar
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5612607749134435030, guid: a0aa9d17154d0425ea5ab85b6141d116, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5789008509417279978, guid: a0aa9d17154d0425ea5ab85b6141d116, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5899727962013318788, guid: a0aa9d17154d0425ea5ab85b6141d116, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6034437731691654228, guid: a0aa9d17154d0425ea5ab85b6141d116, type: 3}
       propertyPath: m_LocalScale.x
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7011055890448907578, guid: a0aa9d17154d0425ea5ab85b6141d116, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7011055890448907578, guid: a0aa9d17154d0425ea5ab85b6141d116, type: 3}
+      propertyPath: InitialModule.startSizeY.scalar
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7011055890448907578, guid: a0aa9d17154d0425ea5ab85b6141d116, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7706078882615624816, guid: a0aa9d17154d0425ea5ab85b6141d116, type: 3}
       propertyPath: m_RootOrder
@@ -91,9 +143,21 @@ PrefabInstance:
       propertyPath: passablePolarity
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8381334537698540730, guid: a0aa9d17154d0425ea5ab85b6141d116, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8381334537698540730, guid: a0aa9d17154d0425ea5ab85b6141d116, type: 3}
+      propertyPath: InitialModule.startSizeY.scalar
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8381334537698540730, guid: a0aa9d17154d0425ea5ab85b6141d116, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8891999204756938470, guid: a0aa9d17154d0425ea5ab85b6141d116, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0aa9d17154d0425ea5ab85b6141d116, type: 3}
