@@ -48,8 +48,16 @@ namespace Assets.Scripts
         public SpriteRenderer darkBG2;
         public AnimationCurve backgroundAnimation;
 
+        [Header("Juice")]
+        public ParticleSystem scoreParticles;
+        public ParticleSystem highScoreParticles;
+        public Gradient lightParticlesColors;
+        public Gradient darkParticlesColors;
+
+
         private float score = 0;
         private static float highScore = 0;
+
 
         private bool isAlive = true;
 
@@ -148,7 +156,29 @@ namespace Assets.Scripts
         private void UpdateScore()
         {
             score += Time.deltaTime * 10;
-            highScore = Mathf.Max(score, highScore);
+            var scoreEmission = scoreParticles.emission;
+            var highScoreEmission = highScoreParticles.emission;
+            var scoreMain = scoreParticles.main;
+            var highScoreMain = highScoreParticles.main;
+            if (score > highScore)
+            {
+                highScore = score;
+                scoreEmission.enabled = true;
+                highScoreEmission.enabled = true;
+            }
+            else
+            {
+                scoreEmission.enabled = false;
+                highScoreEmission.enabled = false;
+            }
+
+            var particlesPalette =
+                Player.Single.polarity == Polarity.Light ?
+                    lightParticlesColors :
+                    darkParticlesColors;
+
+            scoreMain.startColor = particlesPalette;
+            highScoreMain.startColor = particlesPalette;
 
             scoreText.text = ((int)score).ToString();
             highScoreText.text = ((int)highScore).ToString();

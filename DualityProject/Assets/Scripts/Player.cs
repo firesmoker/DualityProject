@@ -13,6 +13,7 @@ namespace Assets.Scripts
         [Header("Juice")]
         public AnimationCurve flipAnimation;
         public AnimationCurve swingAnimation;
+        public AnimationCurve horizontalMovement;
 
         public SpriteRenderer lightCharacter;
         public SpriteRenderer darkCharacter;
@@ -50,8 +51,15 @@ namespace Assets.Scripts
 
             SetRotation(flipState);
             SetFade(flipState);
+            MoveHorizontally();
             GameManager.Single.SetBackgroundAlpha(flipState);
             GameManager.Single.SetUIColors(flipState);
+        }
+
+        private void MoveHorizontally()
+        {
+            var x = horizontalMovement.Evaluate(Time.time);
+            transform.position = new Vector3(x, transform.position.y, transform.position.z);
         }
 
         private void SetFade(float flipState)
@@ -63,6 +71,7 @@ namespace Assets.Scripts
         private void SetRotation(float flipState)
         {
             var angle = flipAnimation.EvaluateByPolarity(flipState, polarity);
+            if (polarity == Polarity.Dark) angle = - angle;
             var swing = swingAnimation.Evaluate(Time.time);
             display.rotation = Quaternion.Euler(0, 0, angle + swing);
         }
