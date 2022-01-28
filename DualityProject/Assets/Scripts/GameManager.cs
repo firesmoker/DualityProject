@@ -59,15 +59,21 @@ namespace Assets.Scripts
             var position = obstacleSpawningPosition.position;
             var parnet = obstaclesContainer.transform;
 
+            var spawningObstaclePrefab = GetRandomObstaclePrefab();
+            var newObstacle = Instantiate(spawningObstaclePrefab, position, Quaternion.identity, parnet);
+            var scale = newObstacle.transform.localScale;
+            newObstacle.transform.localScale = new Vector3(scale.x, widthProbability.Evaluate(Random.value), scale.z);
+        }
+
+        private GameObject GetRandomObstaclePrefab()
+        {
             GameObject spawningObstaclePrefab;
             if (Random.Range(0, 2) == 1)
                 spawningObstaclePrefab = redObstaclePrefab;
             else
                 spawningObstaclePrefab = blueObstaclePrefab;
 
-            var newObstacle = Instantiate(spawningObstaclePrefab, position, Quaternion.identity, parnet);
-            var scale = newObstacle.transform.localScale;
-            newObstacle.transform.localScale = new Vector3(scale.x, widthProbability.Evaluate(Random.value), scale.z);
+            return spawningObstaclePrefab;
         }
 
         public void Die()
