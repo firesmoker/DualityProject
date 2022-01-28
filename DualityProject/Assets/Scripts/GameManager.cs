@@ -55,12 +55,13 @@ namespace Assets.Scripts
         public Gradient darkParticlesColors;
 
         [Header("Music")]
-        public AudioSource music;
+        public GameObject musicPlayer;
+        private static bool musicStarted = false;
+        private AudioSource musicPlayerAudio;
 
 
         private float score = 0;
         private static float highScore = 0;
-
 
         private bool isAlive = true;
 
@@ -91,15 +92,27 @@ namespace Assets.Scripts
 
             deathScreen.SetAlpha(1);
 
-            if (!music.isPlaying)
+            if(!musicStarted)
             {
-                music.Play();
-                DontDestroyOnLoad(music);
+                //Debug.Log("found music player");
+                DontDestroyOnLoad(Instantiate(musicPlayer));
+                musicStarted = true;
+                //if(GameObject.Find("MusicPlayer(Clone)") !=null)
+                //{
+                //    //Debug.Log("YAY!!");
+                //    musicPlayerAudio = musicPlayer.GetComponent<AudioSource>();
+                //}
+                
             }
         }
 
         public void Update()
         {
+            //if(musicPlayerAudio!=null)
+            //{
+            //    //Debug.Log("foundAudio");
+            //    FadeInMusic(musicPlayerAudio);
+            //}
             timeToSpawn -= Time.deltaTime;
             
             if (timeToSpawn <= 0)
@@ -244,6 +257,14 @@ namespace Assets.Scripts
         {
             Destroy(Player.Single.gameObject);
             isAlive = false;
+        }
+
+        public void FadeInMusic(AudioSource music)
+        {
+            if (music.volume < 1)
+            {
+                music.volume = music.volume + 0.001f;
+            }
         }
     }
 }
