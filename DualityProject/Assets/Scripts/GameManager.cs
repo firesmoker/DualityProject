@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -14,6 +15,7 @@ namespace Assets.Scripts
         public float minimalObstaclesGap;
 
         public AnimationCurve cameraSizePerFallingSpeed;
+        public AnimationCurve bgCameraSizePerFallingSpeed;
 
         [Header("Spawning")]
         public AnimationCurve generationRateProbability;
@@ -29,13 +31,17 @@ namespace Assets.Scripts
         [Header("UI")]
         public TextMesh scoreText;
         public TextMesh highScoreText;
+        public TextMesh scoreOutlineText;
+        public TextMesh highScoreOutlineText;
+        public Gradient uiColors;
+        public Gradient uiOutlineColors;
 
         [Header("Cameras")]
         public Camera gameCamera;
         public Camera bgCamera;
 
         [Header("Display")]
-        public SpriteRenderer blackScreen;
+        public SpriteRenderer deathScreen;
         public SpriteRenderer lightBG;
         public SpriteRenderer lightBG2;
         public SpriteRenderer darkBG;
@@ -64,6 +70,15 @@ namespace Assets.Scripts
         {
             Single = this;
             score = 0;
+
+            var resY = GetResolutionY(lightBG);
+
+            lightBG.transform.position = Vector3.up * resY / 2 + Vector3.forward / 2;
+            lightBG2.transform.position = Vector3.down * resY / 2 + Vector3.forward / 2;
+            darkBG.transform.position = Vector3.up * resY / 2 + Vector3.forward;
+            darkBG2.transform.position = Vector3.down * resY / 2 + Vector3.forward;
+
+            deathScreen.SetAlpha(1);
         }
 
         public void Update()
@@ -80,17 +95,33 @@ namespace Assets.Scripts
 
             fallingSpeed += acceleration * Time.deltaTime;
             gameCamera.orthographicSize = cameraSizePerFallingSpeed.Evaluate(fallingSpeed);
+            bgCamera.orthographicSize = bgCameraSizePerFallingSpeed.Evaluate(fallingSpeed);
 
             ScrollBGs();
 
             if (isAlive)
             {
                 UpdateScore();
+                var newAlpha = Mathf.MoveTowards(deathScreen.color.a, 0, Time.deltaTime * 4);
+                deathScreen.SetAlpha(newAlpha); 
             }
             else
             {
                 FadeAndRestart();
             }
+        }
+
+        public void SetUIColors(float flipState)
+        {
+            var color = uiColors.Evaluate(flipState);
+            scoreText.color = color;
+            highScoreText.color = color;
+            var outlineColor = uiOutlineColors.Evaluate(flipState);
+            scoreOutlineText.color = outlineColor;
+            highScoreOutlineText.color = outlineColor;
+
+            var transparentPrimaryColor = new Color(color.r, color.g, color.b, deathScreen.color.a);
+            deathScreen.color = transparentPrimaryColor;
         }
 
         private void ScrollBGs()
@@ -106,28 +137,37 @@ namespace Assets.Scripts
             var parallaxFallingSpeed = fallingSpeed / 2;
             var oldPosition = bg.transform.position;
             var height = oldPosition.y + parallaxFallingSpeed * Time.deltaTime;
-            var spriteYResolution = bg.sprite.bounds.size.y * bg.transform.localScale.y;
+            var spriteYResolution = GetResolutionY(bg);
             if (height > spriteYResolution)
                 height = -spriteYResolution;
             bg.transform.position = new Vector3(oldPosition.x, height, oldPosition.z);
         }
 
+        private float GetResolutionY(SpriteRenderer bg) => bg.sprite.bounds.size.y * bg.transform.localScale.y;
+
         private void UpdateScore()
         {
             score += Time.deltaTime * 10;
             highScore = Mathf.Max(score, highScore);
+
             scoreText.text = ((int)score).ToString();
             highScoreText.text = ((int)highScore).ToString();
+
+            scoreOutlineText.text = ((int)score).ToString();
+            highScoreOutlineText.text = ((int)highScore).ToString();
         }
 
         private void FadeAndRestart()
         {
             Time.timeScale = Mathf.Max(Time.timeScale, 0.5f);
 
-            var currentOpacity = blackScreen.color.a;
+            var currentOpacity = deathScreen.color.a;
             var nextOpacity = currentOpacity + Time.deltaTime;
-            var newColor = new Color(1, 1, 1, nextOpacity);
-            blackScreen.color = newColor;
+            var startBGColor = uiColors.Evaluate(Player.Single.FlipState);
+            var endBGColor = uiColors.colorKeys.First().color;
+            deathScreen.color = Color.Lerp(startBGColor, endBGColor, nextOpacity);
+            deathScreen.SetAlpha(nextOpacity);
+
 
             if (nextOpacity >= 1)
             {

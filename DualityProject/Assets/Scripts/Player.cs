@@ -12,11 +12,17 @@ namespace Assets.Scripts
 
         [Header("Juice")]
         public AnimationCurve flipAnimation;
+        public AnimationCurve swingAnimation;
+
+        public SpriteRenderer lightCharacter;
+        public SpriteRenderer darkCharacter;
 
 
         private float prevFlipState = 0;
         private bool isInsideObstacle;
         private Obstacle currentObstacle;
+
+        public float FlipState => prevFlipState;
 
         public static Player Single;
 
@@ -43,13 +49,22 @@ namespace Assets.Scripts
             prevFlipState = flipState;
 
             SetRotation(flipState);
+            SetFade(flipState);
             GameManager.Single.SetBackgroundAlpha(flipState);
+            GameManager.Single.SetUIColors(flipState);
         }
-        
+
+        private void SetFade(float flipState)
+        {
+            lightCharacter.SetAlpha(1 - flipState);
+            darkCharacter.SetAlpha(flipState);
+        }
+
         private void SetRotation(float flipState)
         {
             var angle = flipAnimation.EvaluateByPolarity(flipState, polarity);
-            display.rotation = Quaternion.Euler(0, 0, angle);
+            var swing = swingAnimation.Evaluate(Time.time);
+            display.rotation = Quaternion.Euler(0, 0, angle + swing);
         }
 
         private float PolarityToFlipState(Polarity polarity)
