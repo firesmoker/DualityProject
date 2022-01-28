@@ -2,19 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace Assets.Scripts
 {
     public class GameManager : MonoBehaviour
     {
-        public float fallingSpeed = 1;
+        public float fallingSpeed;
         public AnimationCurve generationRateProbability;
         public AnimationCurve widthProbability;
         public GameObject redObstaclePrefab, blueObstaclePrefab;
         public GameObject obstaclesContainer;
         public Transform obstacleSpawningPosition;
         public SpriteRenderer blackScreen;
-        public float acceleration = 1;
+        public float acceleration;
+        public float minimalObstaclesGap;
+        public TextMesh scoreText;
+        public TextMesh highScoreText;
+
+        private float score = 0;
+        private static float highScore = 0;
 
         private bool isAlive = true;
         private float timeToSpawn = 0;
@@ -24,6 +31,7 @@ namespace Assets.Scripts
         public void Start()
         {
             Single = this;
+            score = 0;
         }
 
         public void Update()
@@ -32,37 +40,60 @@ namespace Assets.Scripts
             
             if (timeToSpawn <= 0)
             {
-                Spawn();
-                timeToSpawn = generationRateProbability.Evaluate(Random.value);
+                var obstacleHeight = SpawnAndReturnHeight();
+                var initialTimeToSpawn = generationRateProbability.Evaluate(Random.value);
+                var timeHeightAddition = (obstacleHeight + minimalObstaclesGap) / fallingSpeed;
+                timeToSpawn = initialTimeToSpawn + timeHeightAddition;
             }
 
             fallingSpeed += acceleration * Time.deltaTime;
 
-            if (!isAlive)
+            if (isAlive)
             {
-                Time.timeScale = Mathf.Max(Time.timeScale, 0.5f);
+                UpdateScore();
+            }
+            else
+            {
+                FadeAndRestart();
+            }    
+        }
 
-                var currentOpacity = blackScreen.color.a;
-                var nextOpacity = currentOpacity + Time.deltaTime;
-                var newColor = new Color(1, 1, 1, nextOpacity);
-                blackScreen.color = newColor;
+        private void UpdateScore()
+        {
+            score += Time.deltaTime * 10;
+            highScore = Mathf.Max(score, highScore);
+            scoreText.text = ((int)score).ToString();
+            highScoreText.text = ((int)highScore).ToString();
+        }
 
-                if (nextOpacity >= 1)
-                {
-                    SceneManager.LoadScene("Level1");
-                }
+        private void FadeAndRestart()
+        {
+            Time.timeScale = Mathf.Max(Time.timeScale, 0.5f);
+
+            var currentOpacity = blackScreen.color.a;
+            var nextOpacity = currentOpacity + Time.deltaTime;
+            var newColor = new Color(1, 1, 1, nextOpacity);
+            blackScreen.color = newColor;
+
+            if (nextOpacity >= 1)
+            {
+                SceneManager.LoadScene("Level1");
             }
         }
 
-        private void Spawn()
+        private float SpawnAndReturnHeight()
         {
             var position = obstacleSpawningPosition.position;
             var parnet = obstaclesContainer.transform;
 
             var spawningObstaclePrefab = GetRandomObstaclePrefab();
             var newObstacle = Instantiate(spawningObstaclePrefab, position, Quaternion.identity, parnet);
+
             var scale = newObstacle.transform.localScale;
-            newObstacle.transform.localScale = new Vector3(scale.x, widthProbability.Evaluate(Random.value), scale.z);
+            var height = widthProbability.Evaluate(Random.value);
+            newObstacle.transform.localScale = new Vector3(scale.x, height, scale.z);
+
+            return height;
         }
 
         private GameObject GetRandomObstaclePrefab()
@@ -76,7 +107,7 @@ namespace Assets.Scripts
             return spawningObstaclePrefab;
         }
 
-        public void Die()
+        public void InitiateDeath()
         {
             Destroy(Player.Single.gameObject);
             isAlive = false;
