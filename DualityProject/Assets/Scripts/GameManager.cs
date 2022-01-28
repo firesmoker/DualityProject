@@ -23,6 +23,7 @@ namespace Assets.Scripts
         public Transform obstacleSpawningPosition;
         public Transform obstacleDestroyingPosition;
         public GameObject obstaclesContainer;
+        public float SpawnOffset = 0f;
 
         [Header("Obstacles")]
         public GameObject lightObstaclePrefab;
@@ -55,13 +56,16 @@ namespace Assets.Scripts
         public Gradient darkParticlesColors;
 
         [Header("Music")]
-        public AudioSource music;
+        public GameObject musicPlayer;
+        private static bool musicStarted = false;
+        private AudioSource musicPlayerAudio;
 
         public bool IsAlive => isAlive;
 
+        
+
         private float score = 0;
         private static float highScore = 0;
-
 
         private bool isAlive = true;
 
@@ -92,15 +96,27 @@ namespace Assets.Scripts
 
             deathScreen.SetAlpha(1);
 
-            if (!music.isPlaying)
+            if(!musicStarted)
             {
-                music.Play();
-                DontDestroyOnLoad(music);
+                //Debug.Log("found music player");
+                DontDestroyOnLoad(Instantiate(musicPlayer));
+                musicStarted = true;
+                //if(GameObject.Find("MusicPlayer(Clone)") !=null)
+                //{
+                //    //Debug.Log("YAY!!");
+                //    musicPlayerAudio = musicPlayer.GetComponent<AudioSource>();
+                //}
+                
             }
         }
 
         public void Update()
         {
+            //if(musicPlayerAudio!=null)
+            //{
+            //    //Debug.Log("foundAudio");
+            //    FadeInMusic(musicPlayerAudio);
+            //}
             timeToSpawn -= Time.deltaTime;
             
             if (timeToSpawn <= 0)
@@ -108,7 +124,7 @@ namespace Assets.Scripts
                 var obstacleHeight = SpawnAndReturnHeight();
                 var initialTimeToSpawn = generationRateProbability.Evaluate(Random.value);
                 var timeHeightAddition = (obstacleHeight + minimalObstaclesGap) / fallingSpeed;
-                timeToSpawn = initialTimeToSpawn + timeHeightAddition;
+                timeToSpawn = initialTimeToSpawn + timeHeightAddition + SpawnOffset;
             }
 
             fallingSpeed += acceleration * Time.deltaTime;
@@ -244,6 +260,14 @@ namespace Assets.Scripts
         public void InitiateDeath()
         {
             isAlive = false;
+        }
+
+        public void FadeInMusic(AudioSource music)
+        {
+            if (music.volume < 1)
+            {
+                music.volume = music.volume + 0.001f;
+            }
         }
     }
 }
