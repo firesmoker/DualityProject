@@ -45,7 +45,7 @@ namespace Assets.Scripts
 
         public void SetBackground(float flipState)
         {
-            var alpha = backgroundAnimation.Evaluate(flipState);
+            var alpha = backgroundAnimation.EvaluateByPolarity(flipState, Player.Single.polarity);
             var prevColor = redBackground.color;
             var nextColor = new Color(prevColor.r, prevColor.g, prevColor.b, alpha);
             redBackground.color = nextColor;

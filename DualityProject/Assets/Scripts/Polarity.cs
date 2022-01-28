@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using UnityEngine;
 
 namespace Assets.Scripts
@@ -23,9 +24,15 @@ namespace Assets.Scripts
         public static float EvaluateByPolarity(this AnimationCurve curve, float x, Polarity polarity)
         {
             if (polarity == Polarity.Blue)
+            {
                 return curve.Evaluate(x);
+            }
             else
-                return 1 - curve.Evaluate(1 - x);
+            {
+                var startY = curve.keys.First().value;
+                var endY = curve.keys.Last().value;
+                return endY + startY - curve.Evaluate(1 - x);
+            }
         }
     }
 }

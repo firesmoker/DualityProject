@@ -39,16 +39,16 @@ namespace Assets.Scripts
             var targetFlipState = PolarityToFlipState(polarity);
             var fallSpeed = GameManager.Single.fallingSpeed;
             var flipSpeed = flipSpeedPerFallSpeed.Evaluate(fallSpeed);
-            var nextFlipState = Mathf.MoveTowards(prevFlipState, targetFlipState, flipSpeed * Time.deltaTime);
-            prevFlipState = nextFlipState;
+            var flipState = Mathf.MoveTowards(prevFlipState, targetFlipState, flipSpeed * Time.deltaTime);
+            prevFlipState = flipState;
 
-            SetRotation(nextFlipState);
-            GameManager.Single.SetBackground(nextFlipState);
+            SetRotation(flipState);
+            GameManager.Single.SetBackground(flipState);
         }
         
         private void SetRotation(float flipState)
         {
-            var angle = flipAnimation.Evaluate(flipState);
+            var angle = flipAnimation.EvaluateByPolarity(flipState, polarity);
             display.rotation = Quaternion.Euler(0, 0, angle);
         }
 
