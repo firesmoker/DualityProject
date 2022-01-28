@@ -8,11 +8,14 @@ namespace Assets.Scripts
     {
         [NonSerialized] public Polarity polarity;
         public Transform display;
-        public float flipSpeed = 4;
+        public AnimationCurve flipSpeedPerFallSpeed;
+
+        [Header("Juice")]
+        public AnimationCurve flipAnimation;
 
 
-        private float prevRotation = 0;
-        public bool isInsideObstacle;
+        private float prevFlipState = 0;
+        private bool isInsideObstacle;
         private Obstacle currentObstacle;
 
         public static Player Single;
@@ -33,18 +36,28 @@ namespace Assets.Scripts
                 }
             }
 
-            var targetRotation = PolarityToAngle(polarity);
-            var nextRotation = Mathf.MoveTowards(prevRotation, targetRotation, flipSpeed * Time.deltaTime * 180);
-            display.rotation = Quaternion.Euler(0, 0, nextRotation);
-            prevRotation = nextRotation;
+            var targetFlipState = PolarityToFlipState(polarity);
+            var fallSpeed = GameManager.Single.fallingSpeed;
+            var flipSpeed = flipSpeedPerFallSpeed.Evaluate(fallSpeed);
+            var nextFlipState = Mathf.MoveTowards(prevFlipState, targetFlipState, flipSpeed * Time.deltaTime);
+            prevFlipState = nextFlipState;
+
+            SetRotation(nextFlipState);
+            GameManager.Single.SetBackground(nextFlipState);
+        }
+        
+        private void SetRotation(float flipState)
+        {
+            var angle = flipAnimation.Evaluate(flipState);
+            display.rotation = Quaternion.Euler(0, 0, angle);
         }
 
-        private float PolarityToAngle(Polarity polarity)
+        private float PolarityToFlipState(Polarity polarity)
         {
             if (polarity == Polarity.Red)
                 return 0;
             else
-                return 180;
+                return 1;
         }
 
         private void OnTriggerEnter2D(Collider2D collider)

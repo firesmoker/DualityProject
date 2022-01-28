@@ -8,22 +8,49 @@ namespace Assets.Scripts
 {
     public class GameManager : MonoBehaviour
     {
+        [Header("Falling")]
         public float fallingSpeed;
-        public AnimationCurve generationRateProbability;
-        public AnimationCurve widthProbability;
-        public GameObject redObstaclePrefab, blueObstaclePrefab;
-        public GameObject obstaclesContainer;
-        public Transform obstacleSpawningPosition;
-        public SpriteRenderer blackScreen;
         public float acceleration;
         public float minimalObstaclesGap;
+
+        public AnimationCurve cameraSizePerFallingSpeed;
+
+        [Header("Spawning")]
+        public AnimationCurve generationRateProbability;
+        public AnimationCurve widthProbability;
+        public Transform obstacleSpawningPosition;
+        public GameObject obstaclesContainer;
+
+        [Header("Obstacles")]
+        public GameObject redObstaclePrefab;
+        public GameObject blueObstaclePrefab;
+
+        [Header("UI")]
         public TextMesh scoreText;
         public TextMesh highScoreText;
+
+        [Header("Cameras")]
+        public Camera gameCamera;
+        public Camera uiCamera;
+
+        [Header("Display")]
+        public SpriteRenderer blackScreen;
+        public SpriteRenderer redBackground;
+        public AnimationCurve backgroundAnimation;
 
         private float score = 0;
         private static float highScore = 0;
 
         private bool isAlive = true;
+
+        public void SetBackground(float flipState)
+        {
+            var alpha = backgroundAnimation.Evaluate(flipState);
+            var prevColor = redBackground.color;
+            var nextColor = new Color(prevColor.r, prevColor.g, prevColor.b, alpha);
+            redBackground.color = nextColor;
+        }
+
         private float timeToSpawn = 0;
 
         public static GameManager Single;
@@ -47,6 +74,7 @@ namespace Assets.Scripts
             }
 
             fallingSpeed += acceleration * Time.deltaTime;
+            gameCamera.orthographicSize = cameraSizePerFallingSpeed.Evaluate(fallingSpeed);
 
             if (isAlive)
             {
