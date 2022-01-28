@@ -59,6 +59,7 @@ namespace Assets.Scripts
         private static bool musicStarted = false;
         private AudioSource musicPlayerAudio;
 
+        public bool IsAlive => isAlive;
 
         private float score = 0;
         private static float highScore = 0;
@@ -255,7 +256,6 @@ namespace Assets.Scripts
 
         public void InitiateDeath()
         {
-            Destroy(Player.Single.gameObject);
             isAlive = false;
         }
 

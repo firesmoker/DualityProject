@@ -16,6 +16,8 @@ namespace Assets.Scripts
         public AnimationCurve horizontalMovement;
         public float shakeSpeed;
         public float shakeAmplitude;
+        public ParticleSystem lightDismembermentParticles;
+        public ParticleSystem darkDismembermentParticles;
 
         public SpriteRenderer lightCharacter;
         public SpriteRenderer darkCharacter;
@@ -36,12 +38,15 @@ namespace Assets.Scripts
 
         private void Update()
         {
+            if (!GameManager.Single.IsAlive)
+                return;
+
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 polarity = polarity.Flip();
                 if (isInsideObstacle && currentObstacle.passablePolarity != polarity)
                 {
-                    GameManager.Single.InitiateDeath();
+                    InitiateDeath();
                 }
             }
 
@@ -58,10 +63,22 @@ namespace Assets.Scripts
             GameManager.Single.SetUIColors(flipState);
         }
 
+        private void InitiateDeath()
+        {
+            if (polarity == Polarity.Light)
+                lightDismembermentParticles.Play();
+            else
+                darkDismembermentParticles.Play();
+
+            GameManager.Single.InitiateDeath();
+            Destroy(display.gameObject);
+        }
+
         private void MoveHorizontally()
         {
-            var x = horizontalMovement.Evaluate(Time.time);
-            transform.position = new Vector3(x, transform.position.y, transform.position.z);
+            var swing = horizontalMovement.Evaluate(Time.time);
+            var shake = Mathf.PerlinNoise(Time.time * shakeSpeed, 0) * shakeAmplitude;
+            transform.position = new Vector3(swing + shake, transform.position.y, transform.position.z);
         }
 
         private void SetFade(float flipState)
@@ -94,7 +111,7 @@ namespace Assets.Scripts
             var obstaclePolarity = obstacle.passablePolarity;
             if (polarity != obstaclePolarity)
             {
-                GameManager.Single.InitiateDeath();
+                InitiateDeath();
             }
 
             isInsideObstacle = true;
