@@ -19,6 +19,7 @@ namespace Assets.Scripts
         public AnimationCurve generationRateProbability;
         public AnimationCurve widthProbability;
         public Transform obstacleSpawningPosition;
+        public Transform obstacleDestroyingPosition;
         public GameObject obstaclesContainer;
 
         [Header("Obstacles")]

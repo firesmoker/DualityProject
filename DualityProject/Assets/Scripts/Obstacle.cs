@@ -10,6 +10,11 @@ namespace Assets.Scripts
         {
             var advancement = GameManager.Single.fallingSpeed * Time.deltaTime;
             transform.position = transform.position + advancement * Vector3.up;
+
+            if (transform.position.y >= GameManager.Single.obstacleDestroyingPosition.transform.position.y)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }
