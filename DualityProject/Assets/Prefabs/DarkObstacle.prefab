@@ -9,15 +9,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 460980060549892976, guid: a0aa9d17154d0425ea5ab85b6141d116, type: 3}
       propertyPath: m_Color.b
-      value: 1
+      value: 0.0754717
       objectReference: {fileID: 0}
     - target: {fileID: 460980060549892976, guid: a0aa9d17154d0425ea5ab85b6141d116, type: 3}
       propertyPath: m_Color.g
-      value: 1
+      value: 0.0754717
       objectReference: {fileID: 0}
     - target: {fileID: 460980060549892976, guid: a0aa9d17154d0425ea5ab85b6141d116, type: 3}
       propertyPath: m_Color.r
-      value: 0
+      value: 0.0754717
       objectReference: {fileID: 0}
     - target: {fileID: 7706078882615624816, guid: a0aa9d17154d0425ea5ab85b6141d116, type: 3}
       propertyPath: m_RootOrder
@@ -65,7 +65,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7706078882615624817, guid: a0aa9d17154d0425ea5ab85b6141d116, type: 3}
       propertyPath: m_Name
-      value: BlueObstacle
+      value: DarkObstacle
       objectReference: {fileID: 0}
     - target: {fileID: 7706078882615624822, guid: a0aa9d17154d0425ea5ab85b6141d116, type: 3}
       propertyPath: passablePolarity

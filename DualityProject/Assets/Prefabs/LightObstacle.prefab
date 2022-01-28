@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7706078882615624822}
   - component: {fileID: 7706078882615624823}
   m_Layer: 0
-  m_Name: RedObstacle
+  m_Name: LightObstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -144,7 +144,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.81298745, b: 0.40943396, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
