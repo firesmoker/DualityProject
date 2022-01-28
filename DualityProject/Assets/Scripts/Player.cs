@@ -43,7 +43,7 @@ namespace Assets.Scripts
             prevFlipState = flipState;
 
             SetRotation(flipState);
-            GameManager.Single.SetBackground(flipState);
+            GameManager.Single.SetBackgroundAlpha(flipState);
         }
         
         private void SetRotation(float flipState)
@@ -54,7 +54,7 @@ namespace Assets.Scripts
 
         private float PolarityToFlipState(Polarity polarity)
         {
-            if (polarity == Polarity.Red)
+            if (polarity == Polarity.Light)
                 return 0;
             else
                 return 1;

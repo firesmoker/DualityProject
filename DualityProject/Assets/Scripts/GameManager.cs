@@ -23,8 +23,8 @@ namespace Assets.Scripts
         public GameObject obstaclesContainer;
 
         [Header("Obstacles")]
-        public GameObject redObstaclePrefab;
-        public GameObject blueObstaclePrefab;
+        public GameObject lightObstaclePrefab;
+        public GameObject darkObstaclePrefab;
 
         [Header("UI")]
         public TextMesh scoreText;
@@ -32,11 +32,14 @@ namespace Assets.Scripts
 
         [Header("Cameras")]
         public Camera gameCamera;
-        public Camera uiCamera;
+        public Camera bgCamera;
 
         [Header("Display")]
         public SpriteRenderer blackScreen;
-        public SpriteRenderer redBackground;
+        public SpriteRenderer lightBG;
+        public SpriteRenderer lightBG2;
+        public SpriteRenderer darkBG;
+        public SpriteRenderer darkBG2;
         public AnimationCurve backgroundAnimation;
 
         private float score = 0;
@@ -44,12 +47,13 @@ namespace Assets.Scripts
 
         private bool isAlive = true;
 
-        public void SetBackground(float flipState)
+        public void SetBackgroundAlpha(float flipState)
         {
             var alpha = backgroundAnimation.EvaluateByPolarity(flipState, Player.Single.polarity);
-            var prevColor = redBackground.color;
+            var prevColor = lightBG.color;
             var nextColor = new Color(prevColor.r, prevColor.g, prevColor.b, alpha);
-            redBackground.color = nextColor;
+            lightBG.color = nextColor;
+            lightBG2.color = nextColor;
         }
 
         private float timeToSpawn = 0;
@@ -77,6 +81,8 @@ namespace Assets.Scripts
             fallingSpeed += acceleration * Time.deltaTime;
             gameCamera.orthographicSize = cameraSizePerFallingSpeed.Evaluate(fallingSpeed);
 
+            ScrollBGs();
+
             if (isAlive)
             {
                 UpdateScore();
@@ -84,7 +90,25 @@ namespace Assets.Scripts
             else
             {
                 FadeAndRestart();
-            }    
+            }
+        }
+
+        private void ScrollBGs()
+        {
+            ScrollBG(lightBG);
+            ScrollBG(darkBG);
+            ScrollBG(lightBG2);
+            ScrollBG(darkBG2);
+        }
+
+        private void ScrollBG(SpriteRenderer bg)
+        {
+            var parallaxFallingSpeed = fallingSpeed / 2;
+            var oldPosition = bg.transform.position;
+            var height = oldPosition.y + parallaxFallingSpeed * Time.deltaTime;
+            var spriteYResolution = bg.sprite.bounds.size.y * bg.transform.localScale.y;
+            var adjustedHeight = height % spriteYResolution;
+            bg.transform.position = new Vector3(oldPosition.x, adjustedHeight, oldPosition.z);
         }
 
         private void UpdateScore()
@@ -129,9 +153,9 @@ namespace Assets.Scripts
         {
             GameObject spawningObstaclePrefab;
             if (Random.Range(0, 2) == 1)
-                spawningObstaclePrefab = redObstaclePrefab;
+                spawningObstaclePrefab = lightObstaclePrefab;
             else
-                spawningObstaclePrefab = blueObstaclePrefab;
+                spawningObstaclePrefab = darkObstaclePrefab;
 
             return spawningObstaclePrefab;
         }

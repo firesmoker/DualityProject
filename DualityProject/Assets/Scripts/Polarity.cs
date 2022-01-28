@@ -7,23 +7,23 @@ namespace Assets.Scripts
     [Serializable]
     public enum Polarity
     {
-        Red,
-        Blue
+        Light,
+        Dark
     }
 
     public static class Polarities
     {
         public static Polarity Flip(this Polarity polarity)
         {
-            if (polarity == Polarity.Blue)
-                return Polarity.Red;
+            if (polarity == Polarity.Dark)
+                return Polarity.Light;
             else
-                return Polarity.Blue;
+                return Polarity.Dark;
         }
 
         public static float EvaluateByPolarity(this AnimationCurve curve, float x, Polarity polarity)
         {
-            if (polarity == Polarity.Blue)
+            if (polarity == Polarity.Dark)
             {
                 return curve.Evaluate(x);
             }
