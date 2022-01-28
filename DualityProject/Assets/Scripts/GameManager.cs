@@ -23,6 +23,7 @@ namespace Assets.Scripts
         public Transform obstacleSpawningPosition;
         public Transform obstacleDestroyingPosition;
         public GameObject obstaclesContainer;
+        public float SpawnOffset = 0f;
 
         [Header("Obstacles")]
         public GameObject lightObstaclePrefab;
@@ -60,6 +61,8 @@ namespace Assets.Scripts
         private AudioSource musicPlayerAudio;
 
         public bool IsAlive => isAlive;
+
+        
 
         private float score = 0;
         private static float highScore = 0;
@@ -121,7 +124,7 @@ namespace Assets.Scripts
                 var obstacleHeight = SpawnAndReturnHeight();
                 var initialTimeToSpawn = generationRateProbability.Evaluate(Random.value);
                 var timeHeightAddition = (obstacleHeight + minimalObstaclesGap) / fallingSpeed;
-                timeToSpawn = initialTimeToSpawn + timeHeightAddition;
+                timeToSpawn = initialTimeToSpawn + timeHeightAddition + SpawnOffset;
             }
 
             fallingSpeed += acceleration * Time.deltaTime;

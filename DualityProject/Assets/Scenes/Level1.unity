@@ -26089,7 +26089,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b03335569f1ed4c9a9bb30fda9ff0e32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fallingSpeed: 4
+  fallingSpeed: 8
   acceleration: 0.3
   minimalObstaclesGap: 1.5
   cameraSizePerFallingSpeed:
@@ -26209,6 +26209,7 @@ MonoBehaviour:
   obstacleSpawningPosition: {fileID: 192397561}
   obstacleDestroyingPosition: {fileID: 2059089162}
   obstaclesContainer: {fileID: 68346025}
+  SpawnOffset: 1
   lightObstaclePrefab: {fileID: 7706078882615624817, guid: a0aa9d17154d0425ea5ab85b6141d116, type: 3}
   darkObstaclePrefab: {fileID: 478575746484558180, guid: 8751030233ef146419d0bc031bec1c30, type: 3}
   scoreText: {fileID: 21401388}
@@ -26364,7 +26365,7 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
-  music: {fileID: 1024712152}
+  musicPlayer: {fileID: 6279946477393111708, guid: 2d24596397d8c4249a77cea30d531d42, type: 3}
 --- !u!1 &2140960354
 GameObject:
   m_ObjectHideFlags: 0
