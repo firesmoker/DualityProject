@@ -107,8 +107,9 @@ namespace Assets.Scripts
             var oldPosition = bg.transform.position;
             var height = oldPosition.y + parallaxFallingSpeed * Time.deltaTime;
             var spriteYResolution = bg.sprite.bounds.size.y * bg.transform.localScale.y;
-            var adjustedHeight = height % spriteYResolution;
-            bg.transform.position = new Vector3(oldPosition.x, adjustedHeight, oldPosition.z);
+            if (height > spriteYResolution)
+                height = -spriteYResolution;
+            bg.transform.position = new Vector3(oldPosition.x, height, oldPosition.z);
         }
 
         private void UpdateScore()
