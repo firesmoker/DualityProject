@@ -35,6 +35,7 @@ namespace Assets.Scripts
         [Header("Audio")]
         public AudioClip LightDeathSound;
         public AudioClip DarkDeathSound;
+        public AudioClip WooshSound;
 
         private void Start()
         {
@@ -49,6 +50,7 @@ namespace Assets.Scripts
             if (IsInteracting())
             {
                 polarity = polarity.Flip();
+                GetComponent<AudioSource>().PlayOneShot(WooshSound);
                 if (isInsideObstacle && currentObstacle.passablePolarity != polarity)
                 {
                     InitiateDeath();
