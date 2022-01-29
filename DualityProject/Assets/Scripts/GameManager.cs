@@ -88,6 +88,8 @@ namespace Assets.Scripts
             Single = this;
             score = 0;
 
+            highScore = PlayerPrefs.GetFloat("highScore");
+
             var resY = GetResolutionY(lightBG);
 
             lightBG.transform.position = Vector3.up * resY / 2 + Vector3.forward / 2;
@@ -260,6 +262,7 @@ namespace Assets.Scripts
 
         public void InitiateDeath()
         {
+            PlayerPrefs.SetFloat("highScore", highScore);
             isAlive = false;
         }
 

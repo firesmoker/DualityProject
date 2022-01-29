@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Assets.Scripts
@@ -9,7 +10,14 @@ namespace Assets.Scripts
 
         void Start()
         {
+            highScore = PlayerPrefs.GetFloat("highScore");
+
             highScoreText.text = ((int)GameManager.HighScore).ToString();
+        }
+
+        public void Return()
+        {
+            SceneManager.LoadScene("Menu");
         }
 
     }

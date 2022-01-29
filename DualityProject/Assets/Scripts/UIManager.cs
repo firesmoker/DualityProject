@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts
 {
@@ -20,7 +21,7 @@ namespace Assets.Scripts
 
         public void Quit()
         {
-            Application.Quit();
+            SceneManager.LoadScene("Menu");
         }
 
         public void ToggleMenu()
