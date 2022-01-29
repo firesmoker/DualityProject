@@ -41,7 +41,7 @@ namespace Assets.Scripts
             if (!GameManager.Single.IsAlive)
                 return;
 
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (IsInteracting())
             {
                 polarity = polarity.Flip();
                 if (isInsideObstacle && currentObstacle.passablePolarity != polarity)
@@ -61,6 +61,13 @@ namespace Assets.Scripts
             MoveHorizontally();
             GameManager.Single.SetBackgroundAlpha(flipState);
             GameManager.Single.SetUIColors(flipState);
+        }
+
+        private bool IsInteracting()
+        {
+            var keyDown = Input.GetKeyDown(KeyCode.Space);
+            var touching = Input.touchCount > 0;
+            return keyDown && touching;
         }
 
         private void InitiateDeath()
