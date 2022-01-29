@@ -31,6 +31,10 @@ namespace Assets.Scripts
 
         public static Player Single;
 
+        [Header("Audio")]
+        public AudioClip LightDeathSound;
+        public AudioClip DarkDeathSound;
+
         private void Start()
         {
             Single = this;
@@ -73,9 +77,17 @@ namespace Assets.Scripts
         private void InitiateDeath()
         {
             if (polarity == Polarity.Light)
+            {
                 lightDismembermentParticles.Play();
+                GetComponent<AudioSource>().PlayOneShot(LightDeathSound);
+            }
+                
             else
+            {
                 darkDismembermentParticles.Play();
+                GetComponent<AudioSource>().PlayOneShot(DarkDeathSound);
+            }
+                
 
             GameManager.Single.InitiateDeath();
             Destroy(display.gameObject);
