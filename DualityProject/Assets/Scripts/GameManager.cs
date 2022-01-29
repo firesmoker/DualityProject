@@ -57,7 +57,7 @@ namespace Assets.Scripts
 
         [Header("Music")]
         public GameObject musicPlayer;
-        private static bool musicStarted = false;
+        public static bool musicStarted = false;
         private AudioSource musicPlayerAudio;
 
         public bool IsAlive => isAlive;

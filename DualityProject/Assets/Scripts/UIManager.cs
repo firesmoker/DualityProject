@@ -22,9 +22,10 @@ namespace Assets.Scripts
         public void Quit()
         {
             Destroy(GameObject.Find("MusicPlayer(Clone)"));
+            GameManager.musicStarted = false;
             SceneManager.LoadScene("Menu");
         }
-
+        
         public void ToggleMenu()
         {
             if (GameManager.Single.IsAlive)
