@@ -10128,6 +10128,7 @@ MonoBehaviour:
   darkCharacter: {fileID: 6503077103255032008}
   LightDeathSound: {fileID: 8300000, guid: b54d96d0ff7d54913a105070c086d4b4, type: 3}
   DarkDeathSound: {fileID: 8300000, guid: b82707df1a915480bb2eac9d2e9ac888, type: 3}
+  WooshSound: {fileID: 8300000, guid: 9ea3234a0413a4fad8d74a7c9bd76eeb, type: 3}
 --- !u!61 &6503077103916634469
 BoxCollider2D:
   m_ObjectHideFlags: 0
