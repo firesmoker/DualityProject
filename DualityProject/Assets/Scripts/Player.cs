@@ -49,12 +49,7 @@ namespace Assets.Scripts
 
             if (IsInteracting())
             {
-                polarity = polarity.Flip();
-                GetComponent<AudioSource>().PlayOneShot(WooshSound);
-                if (isInsideObstacle && currentObstacle.passablePolarity != polarity)
-                {
-                    InitiateDeath();
-                }
+                StartFlipping();
             }
 
             var targetFlipState = PolarityToFlipState(polarity);
@@ -68,6 +63,17 @@ namespace Assets.Scripts
             MoveHorizontally();
             GameManager.Single.SetBackgroundAlpha(flipState);
             GameManager.Single.SetUIColors(flipState);
+        }
+
+        private void StartFlipping()
+        {
+            polarity = polarity.Flip();
+            AndroidManager.HapticFeedback();
+            GetComponent<AudioSource>().PlayOneShot(WooshSound);
+            if (isInsideObstacle && currentObstacle.passablePolarity != polarity)
+            {
+                InitiateDeath();
+            }
         }
 
         private bool IsInteracting()
