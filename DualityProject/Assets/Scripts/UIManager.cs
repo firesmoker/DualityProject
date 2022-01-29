@@ -21,6 +21,7 @@ namespace Assets.Scripts
 
         public void Quit()
         {
+            Destroy(GameObject.Find("MusicPlayer(Clone)"));
             SceneManager.LoadScene("Menu");
         }
 
