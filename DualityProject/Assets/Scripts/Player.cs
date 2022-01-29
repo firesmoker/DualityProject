@@ -94,7 +94,8 @@ namespace Assets.Scripts
                 darkDismembermentParticles.Play();
                 GetComponent<AudioSource>().PlayOneShot(DarkDeathSound);
             }
-                
+
+            AndroidManager.HapticFeedback();
 
             GameManager.Single.InitiateDeath();
             Destroy(display.gameObject);
