@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -70,8 +71,8 @@ namespace Assets.Scripts
         private bool IsInteracting()
         {
             var keyDown = Input.GetKeyDown(KeyCode.Space);
-            var touching = Input.touchCount > 0;
-            return keyDown && touching;
+            var touching = Input.touches.Any(t => t.phase == TouchPhase.Began);
+            return keyDown || touching;
         }
 
         private void InitiateDeath()
