@@ -88,6 +88,8 @@ namespace Assets.Scripts
             Single = this;
             score = 0;
 
+            Time.timeScale = 1;
+
             highScore = PlayerPrefs.GetFloat("highScore");
 
             var resY = GetResolutionY(lightBG);
