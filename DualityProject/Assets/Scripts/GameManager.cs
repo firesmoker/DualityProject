@@ -65,7 +65,7 @@ namespace Assets.Scripts
         
 
         private float score = 0;
-        private static float highScore = 0;
+        public static float highScore = 0;
         public static float HighScore => highScore;
 
         private bool isAlive = true;

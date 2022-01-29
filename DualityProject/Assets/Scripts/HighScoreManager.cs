@@ -10,7 +10,7 @@ namespace Assets.Scripts
 
         void Start()
         {
-            highScore = PlayerPrefs.GetFloat("highScore");
+            GameManager.highScore = PlayerPrefs.GetFloat("highScore");
 
             highScoreText.text = ((int)GameManager.HighScore).ToString();
         }
