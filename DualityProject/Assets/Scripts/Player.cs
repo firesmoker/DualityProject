@@ -48,11 +48,7 @@ namespace Assets.Scripts
 
             if (IsInteracting())
             {
-                polarity = polarity.Flip();
-                if (isInsideObstacle && currentObstacle.passablePolarity != polarity)
-                {
-                    InitiateDeath();
-                }
+                StartFlipping();
             }
 
             var targetFlipState = PolarityToFlipState(polarity);
@@ -66,6 +62,16 @@ namespace Assets.Scripts
             MoveHorizontally();
             GameManager.Single.SetBackgroundAlpha(flipState);
             GameManager.Single.SetUIColors(flipState);
+        }
+
+        private void StartFlipping()
+        {
+            polarity = polarity.Flip();
+            AndroidManager.HapticFeedback();
+            if (isInsideObstacle && currentObstacle.passablePolarity != polarity)
+            {
+                InitiateDeath();
+            }
         }
 
         private bool IsInteracting()

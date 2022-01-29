@@ -471,7 +471,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1358655427}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &351773436
 SpriteRenderer:
@@ -553,7 +553,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1358655427}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &412186503
 SpriteRenderer:
@@ -650,7 +650,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 7
+  orthographic size: 8
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
@@ -733,7 +733,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 7
+  orthographic size: 8
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -5625,7 +5625,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10.7
+  orthographic size: 11.7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -10717,10 +10717,10 @@ Transform:
   m_LocalScale: {x: 1.0015, y: 1.0015, z: 1}
   m_Children:
   - {fileID: 1070860799}
-  - {fileID: 412186502}
   - {fileID: 2015021860}
-  - {fileID: 351773435}
   - {fileID: 1813138942}
+  - {fileID: 412186502}
+  - {fileID: 351773435}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -15557,7 +15557,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1358655427}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1813138943
 SpriteRenderer:
@@ -15829,7 +15829,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1358655427}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2015021861
 SpriteRenderer:
@@ -15963,7 +15963,7 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 6
+      value: 7
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -15972,7 +15972,7 @@ MonoBehaviour:
       outWeight: 0
     - serializedVersion: 3
       time: 6
-      value: 6
+      value: 7
       inSlope: 0.0074597807
       outSlope: 0.0074597807
       tangentMode: 0
@@ -15981,7 +15981,7 @@ MonoBehaviour:
       outWeight: 0.040529
     - serializedVersion: 3
       time: 35
-      value: 10
+      value: 11
       inSlope: 0
       outSlope: 0
       tangentMode: 136
@@ -15996,7 +15996,7 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 10.7
+      value: 11.7
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -16005,7 +16005,7 @@ MonoBehaviour:
       outWeight: 0
     - serializedVersion: 3
       time: 6
-      value: 10.7
+      value: 11.7
       inSlope: 0.0074597807
       outSlope: 0.0074597807
       tangentMode: 0
@@ -16014,7 +16014,7 @@ MonoBehaviour:
       outWeight: 0.040529
     - serializedVersion: 3
       time: 35
-      value: 12.5
+      value: 13.5
       inSlope: 0
       outSlope: 0
       tangentMode: 136
