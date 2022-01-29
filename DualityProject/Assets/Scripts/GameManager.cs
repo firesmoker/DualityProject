@@ -58,7 +58,7 @@ namespace Assets.Scripts
         [Header("Music")]
         public GameObject musicPlayer;
         public static bool musicStarted = false;
-        private AudioSource musicPlayerAudio;
+        public AudioSource particleTingleSource;
 
         public bool IsAlive => isAlive;
 
@@ -193,6 +193,8 @@ namespace Assets.Scripts
             var highScoreMain = highScoreParticles.main;
             if (score > highScore)
             {
+                if(!particleTingleSource.isPlaying)
+                    particleTingleSource.Play();
                 highScore = score;
                 scoreEmission.enabled = true;
                 highScoreEmission.enabled = true;
@@ -265,6 +267,7 @@ namespace Assets.Scripts
         public void InitiateDeath()
         {
             PlayerPrefs.SetFloat("highScore", highScore);
+            particleTingleSource.Stop();
             isAlive = false;
         }
 
