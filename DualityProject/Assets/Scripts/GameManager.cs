@@ -65,7 +65,7 @@ namespace Assets.Scripts
         
 
         private float score = 0;
-        public static float highScore = 0;
+        public static float highScore = 50;
         public static float HighScore => highScore;
 
         private bool isAlive = true;
@@ -90,7 +90,7 @@ namespace Assets.Scripts
 
             Time.timeScale = 1;
 
-            highScore = 50;// PlayerPrefs.GetFloat("highScore");
+            //highScore = PlayerPrefs.GetFloat("highScore");
 
             var resY = GetResolutionY(lightBG);
 
