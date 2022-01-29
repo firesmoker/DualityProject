@@ -90,7 +90,7 @@ namespace Assets.Scripts
 
             Time.timeScale = 1;
 
-            highScore = PlayerPrefs.GetFloat("highScore");
+            highScore = 50;// PlayerPrefs.GetFloat("highScore");
 
             var resY = GetResolutionY(lightBG);
 
